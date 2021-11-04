@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Set;
 
 public class TextAnalyzer {
 	public static void main(String args[]) {
@@ -46,7 +50,15 @@ public class TextAnalyzer {
 	}
 	private static List<Entry<String, Integer>> sortByValueInDecreasingOrder(Map<String, Integer> wordMap) {
 		// TODO Auto-generated method stub
-		return null;
+		Set<Entry<String, Integer>> entries = wordMap.entrySet();
+		List<Entry<String, Integer>> list = new ArrayList<>(entries);
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+			@Override
+			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+				return (o2.getValue()).compareTo(o1.getValue());
+			}
+		});
+		return list;
 	}
 
 }
