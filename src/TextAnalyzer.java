@@ -60,13 +60,4 @@ public class TextAnalyzer {
 		});
 		return list;
 	}
-	public int countThe(String the) {
-		int count = 0;
-		for(int i = 0; i < the.length(); i++) {
-			if(the.charAt(i) == 't' && the.charAt(i) == 'h' && the.charAt(i) == 'e') {
-				count++;
-			}
-		}
-		return count;
-	}
 }
