@@ -1,10 +1,17 @@
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class TextAnalyzer {
 	public static void main(String args[]) {
-		Map<String, Integer> wordMap = buildWordMap("C:/users/David/documents/MacBeth.txt");
+		Map<String, Integer> wordMap = buildWordMap("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
 		List<Entry<String, Integer>> list = sortByValueInDecreasingOrder(wordMap);
 		System.out.println("List of repeated words");
 		for (Map.Entry<String, Integer> entry : list) {
@@ -13,14 +20,33 @@ public class TextAnalyzer {
 			}
 		}
 	}
-
+	private static Map<String, Integer> buildWordMap(String fileName) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> wordMap = new HashMap<>();
+		try (FileInputStream fis = new FileInputStream(fileName);
+		DataInputStream dis = new DataInputStream(fis);
+		BufferedReader br = new BufferedReader(new InputStreamReader(dis))) {
+			Pattern pattern = Pattern.compile("\\s+");
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				line = line.toLowerCase();
+				String[] words = pattern.split(line);
+				for (String word : words) {
+					if (wordMap.containsKey(word)) {
+						wordMap.put(word, (wordMap.get(word) + 1));
+					} else {
+					wordMap.put(word, 1);
+					}
+				}
+			}
+		} catch (IOException ioex) {
+		ioex.printStackTrace();
+		}
+		return wordMap;
+	}
 	private static List<Entry<String, Integer>> sortByValueInDecreasingOrder(Map<String, Integer> wordMap) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private static Map<String, Integer> buildWordMap(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
