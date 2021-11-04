@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class TextAnalyzer {
 	public static void main(String args[]) {
-		Map<String, Integer> wordMap = buildWordMap("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
+		Map<String, Integer> wordMap = buildWordMap("src//TheRaven.txt");
 		List<Entry<String, Integer>> list = sortByValueInDecreasingOrder(wordMap);
 		System.out.println("List of repeated words");
 		for (Map.Entry<String, Integer> entry : list) {
