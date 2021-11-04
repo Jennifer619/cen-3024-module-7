@@ -3,6 +3,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -59,5 +60,14 @@ public class TextAnalyzer {
 			}
 		});
 		return list;
+	}
+	public int countThe(File file) {
+		int count = 0;
+		for(int i = 0; i < file.length(); i++) {
+			if(((CharSequence) file).charAt(i) == 't' && ((CharSequence) file).charAt(i) == 'h' && ((CharSequence) file).charAt(i) == 'e') {
+				count++;
+			}
+		}
+		return count;
 	}
 }
